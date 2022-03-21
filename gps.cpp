@@ -31,29 +31,22 @@ void GPS::algoritmo()
     int sum_vector_2 = 0;
     int xor_2 = 0;
     cout << endl;
-    cout << "LFSR1: ";
-    imprimir_vectores(vector_uno);
-    cout << "   Realimentación: " << 0;
-    cout << "    »»»»»     LFSR2: ";
-    imprimir_vectores(vector_dos);
-    cout << "   Realimentación: " << 0;
-    cout << endl;
     vector_final.resize(n_turnos_);
-    for (int i = 0; i < n_turnos_ - 1; i++)
+    for (int i = 0; i < n_turnos_; i++)
     {
         sum_vector_1 = xor_function(vector_uno[2] + vector_uno[9]);
         xor_2 = xor_function(vector_dos[1] + vector_dos[5]);
         vector_final[i] = xor_function(xor_2 + vector_uno[9]);
-        desplazar_vector(sum_vector_1, 1);
         cout << "LFSR1: ";
         imprimir_vectores(vector_uno);
         cout << "   Realimentación: " << sum_vector_1;
         sum_vector_2 = xor_function(vector_dos[1] + vector_dos[2] + vector_dos[5] + vector_dos[7] + vector_dos[8] + vector_dos[9]);
-        desplazar_vector(sum_vector_2, 2);
         cout << "    »»»»»     LFSR2: ";
         imprimir_vectores(vector_dos);
         cout << "   Realimentación: " << sum_vector_2;
         cout << endl;
+        desplazar_vector(sum_vector_1, 1);
+        desplazar_vector(sum_vector_2, 2);
     }
     cout << endl;
     cout << "vector final: [ ";
@@ -61,7 +54,7 @@ void GPS::algoritmo()
     {
         cout << " " << vector_final[i];
     }
-    cout << " ] "<< endl;
+    cout << " ] " << endl;
     cout << endl;
 }
 
